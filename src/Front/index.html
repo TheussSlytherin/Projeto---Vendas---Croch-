@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrelinhas | Loja de Crochê</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="tela-login" class="tela-login">
+    <div class="panel-login">
+      <div class="brand-box">
+        <span class="brand-mark">🧶</span>
+        <div>
+          <h1>Entrelinhas</h1>
+          <p>Ateliê de crochê artesanal</p>
+        </div>
+      </div>
+
+      <div class="login-badge">Peças exclusivas e feitas à mão</div>
+
+      <h2>Crie sua conta</h2>
+      <p class="subtitulo">Acesse o catálogo e monte o seu carrinho com peças únicas de crochê.</p>
+
+      <form id="form-login" class="form-login">
+        <div class="campo-duplo">
+          <div class="campo">
+            <label for="nome-login">Nome</label>
+            <input id="nome-login" type="text" placeholder="Seu nome completo" required />
+          </div>
+
+          <div class="campo">
+            <label for="telefone-login">Telefone</label>
+            <input id="telefone-login" type="tel" placeholder="(11) 99999-9999" required />
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="email-login">E-mail</label>
+          <input id="email-login" type="email" placeholder="seuemail@email.com" required />
+        </div>
+
+        <div class="campo">
+          <label for="senha-login">Senha</label>
+          <input id="senha-login" type="password" placeholder="Crie sua senha" required />
+        </div>
+
+        <button type="submit" class="btn-login">Entrar na loja</button>
+      </form>
+    </div>
+
+    <div class="login-arte">
+      <div class="arte-card">
+        <span class="arte-icone">✨</span>
+        <h3>Produtos feitos com carinho</h3>
+        <p>Amigurumis, chaveiros e kits exclusivos para presentear, decorar e colecionar.</p>
+      </div>
+      <div class="arte-card destaque">
+        <span class="arte-icone">🧵</span>
+        <h3>Trabalho artesanal</h3>
+        <p>Linhas macias, acabamento cuidadoso e detalhes que fazem toda a diferença.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="sistema-loja" class="sistema-loja oculto">
+    <header class="header">
+      <div class="logo">
+        <span class="icon">🧶</span>
+        <div>
+          <h1>Entrelinhas</h1>
+          <p>Crochê & Amigurumis</p>
+        </div>
+      </div>
+
+      <div class="usuario-logado">
+        <span id="nome-usuario-logado">👤 Cliente</span>
+        <button class="btn-sair" type="button" onclick="fazerLogout()">Sair</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="catalogo-section">
+        <div class="titulo-catalogo">
+          <div>
+            <span class="eyebrow">Coleção exclusiva</span>
+            <h2>Catálogo de peças</h2>
+          </div>
+        </div>
+
+        <div id="grid-produtos" class="grid-produtos"></div>
+      </section>
+
+      <aside class="carrinho-section">
+        <h2>🛍️ Meu carrinho</h2>
+
+        <div id="lista-carrinho" class="lista-carrinho"></div>
+
+        <div class="resumo-financeiro">
+          <div class="linha-valor">
+            <span>Subtotal</span>
+            <span id="subtotal-val">R$ 0,00</span>
+          </div>
+          <div class="linha-valor">
+            <span>Frete</span>
+            <span id="frete-val">R$ 0,00</span>
+          </div>
+          <div class="linha-valor total">
+            <span>Total geral</span>
+            <span id="total-val">R$ 0,00</span>
+          </div>
+
+          <div class="acoes-carrinho">
+            <button class="btn-retirar" type="button" onclick="limparCarrinho()">Retirar itens</button>
+            <button class="btn-finalizar" type="button" onclick="finalizarCompra()">Confirmar compra</button>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

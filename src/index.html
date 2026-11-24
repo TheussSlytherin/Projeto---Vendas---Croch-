@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrelinhas | Loja de Crochê</title>
+  <style>
+    :root {
+      --bg: #fdfbf7;
+      --panel: #ffffff;
+      --panel-soft: #fff7ec;
+      --primary: #d97706;
+      --primary-dark: #b45309;
+      --success: #059669;
+      --success-dark: #047857;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --border: #f1e5d6;
+      --shadow: 0 12px 30px rgba(23, 24, 34, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #fffaf3 0%, #fef6ea 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    .login-page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: radial-gradient(circle at top, #fff8ef 0%, #f9efe4 100%);
+    }
+
+    .auth-card {
+      width: min(100%, 460px);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .brand-mark {
+      font-size: 2rem;
+    }
+
+    .auth-card h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .auth-card .subtitle {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.45rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border-radius: 12px;
+      border: 1px solid #e5d5b9;
+      background: #fffdfb;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.12);
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .add-btn,
+    .qty-btn,
+    .remove-btn {
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .primary-btn:hover,
+    .secondary-btn:hover,
+    .add-btn:hover,
+    .qty-btn:hover,
+    .remove-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary-btn {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.95rem 1rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+
+    .primary-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .secondary-btn {
+      background: #f2f2f2;
+      color: var(--text);
+      padding: 0.8rem 1rem;
+      font-weight: 600;
+    }
+
+    .message {
+      min-height: 1.2rem;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .message.error {
+      color: #b42318;
+    }
+
+    .message.success {
+      color: var(--success-dark);
+    }
+
+    .catalog-page {
+      background: #fffaf2;
+    }
+
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.02);
+    }
+
+    .topbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-mini {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .logout-btn {
+      background: #fff8f0;
+      color: var(--primary-dark);
+      border: 1px solid #f4d7ac;
+      border-radius: 999px;
+      padding: 0.55rem 0.9rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+      gap: 2rem;
+    }
+
+    .catalog-box,
+    .cart-box {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 1.25rem;
+    }
+
+    .catalog-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .catalog-header h2,
+    .cart-box h2 {
+      font-size: 1.5rem;
+      color: var(--text);
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid #f1e6d5;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 175px;
+      object-fit: cover;
+      background: #f8f3ea;
+    }
+
+    .product-content {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .tag {
+      display: inline-block;
+      width: fit-content;
+      background: #fef3c7;
+      color: var(--primary-dark);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    .product-card h3 {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .product-card p {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-top: 1px solid #f5efe7;
+      padding-top: 0.8rem;
+    }
+
+    .price {
+      font-weight: 800;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .add-btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.7rem 0.9rem;
+      font-weight: 700;
+    }
+
+    .add-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .cart-box {
+      position: sticky;
+      top: 1rem;
+      align-self: start;
+      min-height: 430px;
+    }
+
+    .cart-items {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      min-height: 180px;
+    }
+
+    .empty-cart {
+      color: var(--muted);
+      text-align: center;
+      padding: 2rem 1rem;
+      border: 1px dashed #ead8b0;
+      border-radius: 12px;
+      background: #fffaf2;
+    }
+
+    .cart-item {
+      background: #fffaf3;
+      border: 1px solid #f1e3c9;
+      border-radius: 14px;
+      padding: 0.8rem 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .cart-item-name {
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      font-size: 0.95rem;
+    }
+
+    .cart-item-price {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .cart-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      background: #ffe5c4;
+      color: var(--primary-dark);
+      font-weight: 700;
+      border-radius: 8px;
+    }
+
+    .remove-btn {
+      background: #f8e8e8;
+      color: #b42318;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .summary {
+      border-top: 1px dashed #eadfc4;
+      padding-top: 1rem;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+    }
+
+    .summary-row.total {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 0.7rem;
+    }
+
+    .cart-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .secondary-btn.light {
+      background: #fff5ea;
+      color: var(--primary-dark);
+      border: 1px solid #f2d3a0;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .catalog-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cart-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section id="login-page" class="page login-page">
+    <div class="auth-card">
+      <div class="brand">
+        <span class="brand-mark">🧶</span>
+        <span>Entrelinhas</span>
+      </div>
+
+      <h1>Entre na sua conta</h1>
+      <p class="subtitle">Cadastre seus dados e acesse o catálogo para escolher seus amigurumis favoritos.</p>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="nome">Nome completo</label>
+          <input id="nome" name="nome" type="text" placeholder="Ex: Maria Silva" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" placeholder="Ex: maria@email.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="telefone">Telefone</label>
+          <input id="telefone" name="telefone" type="tel" placeholder="Ex: (11) 99888-1234" required />
+        </div>
+
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input id="senha" name="senha" type="password" placeholder="Crie uma senha" required />
+        </div>
+
+        <button class="primary-btn" type="submit">Entrar na loja</button>
+      </form>
+
+      <p id="login-message" class="message" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section id="catalog-page" class="page catalog-page hidden">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand-mini">
+          <span>🧶</span>
+          <span>Entrelinhas</span>
+        </div>
+
+        <div class="user-badge">
+          <span>Olá, <strong id="user-name">Cliente</strong></span>
+          <button class="logout-btn" id="logout-btn" type="button">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="catalog-box">
+        <div class="catalog-header">
+          <h2>Catálogo de vendas</h2>
+        </div>
+
+        <div id="catalog-grid" class="catalog-grid"></div>
+      </section>
+
+      <aside class="cart-box">
+        <h2>Meu carrinho</h2>
+
+        <div id="cart-items" class="cart-items"></div>
+
+        <div class="summary">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <strong id="subtotal">R$ 0,00</strong>
+          </div>
+          <div class="summary-row">
+            <span>Frete</span>
+            <strong id="frete">R$ 0,00</strong>
+          </div>
+          <div class="summary-row total">
+            <span>Total</span>
+            <strong id="total">R$ 0,00</strong>
+          </div>
+        </div>
+
+        <div class="cart-actions">
+          <button type="button" id="clear-cart" class="secondary-btn light">Retirar tudo</button>
+          <button type="button" id="confirm-purchase" class="primary-btn">Confirmar compra</button>
+        </div>
+      </aside>
+    </main>
+  </section>
+
+  <script>
+    const catalogoProdutos = [
+      {
+        id: 1,
+        nome: 'Chaveiro / Mini Amigurumi',
+        descricao: 'Mini peça de crochê artesanal ideal para bolsas e chaves, feita com fio 100% algodão.',
+        preco: 25.0,
+        categoria: 'Mais vendido',
+        imagem: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 2,
+        nome: 'Bichinho Pronta Entrega',
+        descricao: 'Amigurumi de tamanho médio padrão, macio, seguro e antialérgico para crianças.',
+        preco: 45.0,
+        categoria: 'Pronta entrega',
+        imagem: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 3,
+        nome: 'Encomenda Personalizada',
+        descricao: 'Peça exclusiva feita sob medida conforme as cores, o animal e o tamanho escolhido pelo cliente.',
+        preco: 70.0,
+        categoria: 'Sob medida',
+        imagem: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 4,
+        nome: 'Kit Presente Dueto',
+        descricao: 'Conjunto especial contendo um bichinho médio e um chaveiro combinando, com embalagem inclusa.',
+        preco: 110.0,
+        categoria: 'Kit promocional',
+        imagem: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=500&q=80'
+      },
+      {
+        id: 5,
+        nome: 'Kit Colecionável (3 Minis)',
+        descricao: 'Família de mini bichinhos artesanais para colecionar ou decorar.',
+        preco: 95.0,
+        categoria: 'Kit especial',
+        imagem: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=500&q=80'
+      }
+    ];
+
+    const estado = {
+      usuario: null,
+      carrinho: []
+    };
+
+    const FRETE_FIXO = 15.0;
+
+    function formatarMoeda(valor) {
+      return valor.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+    }
+
+    function mostrarMensagem(mensagem, tipo = '') {
+      const elemento = document.getElementById('login-message');
+      elemento.textContent = mensagem;
+      elemento.className = 'message';
+
+      if (tipo) {
+        elemento.classList.add(tipo);
+      }
+    }
+
+    function mostrarPagina(pagina) {
+      document.getElementById('login-page').classList.toggle('hidden', pagina !== 'login');
+      document.getElementById('catalog-page').classList.toggle('hidden', pagina !== 'catalog');
+    }
+
+    function adicionarAoCarrinho(idProduto) {
+      const produto = catalogoProdutos.find(item => item.id === idProduto);
+
+      if (!produto) return;
+
+      const itemExistente = estado.carrinho.find(item => item.id === idProduto);
+
+      if (itemExistente) {
+        itemExistente.quantidade += 1;
+      } else {
+        estado.carrinho.push({
+          id: produto.id,
+          nome: produto.nome,
+          preco: produto.preco,
+          quantidade: 1
+        });
+      }
+
+      atualizarCarrinho();
+    }
+
+    function diminuirQuantidade(idProduto) {
+      const item = estado.carrinho.find(produto => produto.id === idProduto);
+
+      if (!item) return;
+
+      item.quantidade -= 1;
+
+      if (item.quantidade <= 0) {
+        estado.carrinho = estado.carrinho.filter(produto => produto.id !== idProduto);
+      }
+
+      atualizarCarrinho();
+    }
+
+    function removerItem(idProduto) {
+      estado.carrinho = estado.carrinho.filter(item => item.id !== idProduto);
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      const cartItems = document.getElementById('cart-items');
+
+      if (estado.carrinho.length === 0) {
+        cartItems.innerHTML = '<div class="empty-cart">Seu carrinho está vazio.<br>Adicione alguns itens para continuar.</div>';
+      } else {
+        cartItems.innerHTML = estado.carrinho.map(item => `
+          <div class="cart-item">
+            <div>
+              <div class="cart-item-name">${item.nome}</div>
+              <div class="cart-item-price">${formatarMoeda(item.preco)} x ${item.quantidade}</div>
+            </div>
+
+            <div class="cart-controls">
+              <button class="qty-btn" type="button" data-action="decrease" data-id="${item.id}">-</button>
+              <button class="qty-btn" type="button" data-action="increase" data-id="${item.id}">+</button>
+              <button class="remove-btn" type="button" data-remove-id="${item.id}">Remover</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      const subtotal = estado.carrinho.reduce((total, item) => total + item.preco * item.quantidade, 0);
+      const frete = estado.carrinho.length > 0 ? FRETE_FIXO : 0;
+      const total = subtotal + frete;
+
+      document.getElementById('subtotal').textContent = formatarMoeda(subtotal);
+      document.getElementById('frete').textContent = formatarMoeda(frete);
+      document.getElementById('total').textContent = formatarMoeda(total);
+    }
+
+    function renderizarCatalogo() {
+      const grid = document.getElementById('catalog-grid');
+
+      grid.innerHTML = catalogoProdutos.map(produto => `
+        <article class="product-card">
+          <img src="${produto.imagem}" alt="${produto.nome}" />
+          <div class="product-content">
+            <span class="tag">${produto.categoria}</span>
+            <h3>${produto.nome}</h3>
+            <p>${produto.descricao}</p>
+
+            <div class="product-footer">
+              <span class="price">${formatarMoeda(produto.preco)}</span>
+              <button class="add-btn" type="button" data-id="${produto.id}">Adicionar</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.getElementById('login-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+
+      if (!nome || !email || !telefone || !senha) {
+        mostrarMensagem('Preencha todos os campos para continuar.', 'error');
+        return;
+      }
+
+      estado.usuario = {
+        nome,
+        email,
+        telefone
+      };
+
+      document.getElementById('user-name').textContent = nome.split(' ')[0];
+      mostrarMensagem('Login realizado com sucesso!', 'success');
+      mostrarPagina('catalog');
+      atualizarCarrinho();
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', function () {
+      estado.usuario = null;
+      estado.carrinho = [];
+      document.getElementById('login-form').reset();
+      mostrarMensagem('Você saiu da sua conta.', 'success');
+      mostrarPagina('login');
+      atualizarCarrinho();
+    });
+
+    document.getElementById('catalog-grid').addEventListener('click', function (event) {
+      const botao = event.target.closest('.add-btn');
+
+      if (!botao) return;
+
+      const idProduto = Number(botao.dataset.id);
+      adicionarAoCarrinho(idProduto);
+    });
+
+    document.getElementById('cart-items').addEventListener('click', function (event) {
+      const botaoAumentar = event.target.closest('[data-action="increase"]');
+      if (botaoAumentar) {
+        adicionarAoCarrinho(Number(botaoAumentar.dataset.id));
+        return;
+      }
+
+      const botaoDiminuir = event.target.closest('[data-action="decrease"]');
+      if (botaoDiminuir) {
+        diminuirQuantidade(Number(botaoDiminuir.dataset.id));
+        return;
+      }
+
+      const botaoRemover = event.target.closest('[data-remove-id]');
+      if (botaoRemover) {
+        removerItem(Number(botaoRemover.dataset.removeId));
+      }
+    });
+
+    document.getElementById('clear-cart').addEventListener('click', function () {
+      estado.carrinho = [];
+      atualizarCarrinho();
+    });
+
+    document.getElementById('confirm-purchase').addEventListener('click', function () {
+      if (estado.carrinho.length === 0) {
+        alert('Seu carrinho está vazio. Adicione alguns itens antes de confirmar a compra.');
+        return;
+      }
+
+      const nomeCliente = estado.usuario ? estado.usuario.nome : 'Cliente';
+      const total = estado.carrinho.reduce((soma, item) => soma + item.preco * item.quantidade, 0) + FRETE_FIXO;
+
+      alert(`${nomeCliente}, sua compra foi confirmada com sucesso!\n\nTotal: ${formatarMoeda(total)}`);
+      estado.carrinho = [];
+      atualizarCarrinho();
+    });
+
+    renderizarCatalogo();
+    atualizarCarrinho();
+    mostrarPagina('login');
+  </script>
+</body>
+</html>

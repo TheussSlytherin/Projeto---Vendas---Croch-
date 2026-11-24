@@ -1,0 +1,540 @@
+:root {
+  --bg: #fdf8f2;
+  --bg-strong: #f7efe4;
+  --panel: rgba(255, 255, 255, 0.88);
+  --panel-strong: #fffdfb;
+  --primary: #b86a2a;
+  --primary-dark: #8f4816;
+  --primary-soft: #f8e5d2;
+  --accent: #d8b07b;
+  --text: #2b241f;
+  --muted: #695e57;
+  --line: #eadcc9;
+  --success: #2f7d5a;
+  --success-dark: #1f5b3d;
+  --shadow: 0 18px 40px rgba(66, 43, 18, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(216, 176, 123, 0.22), transparent 30%),
+    linear-gradient(180deg, #fdf9f3 0%, #f7efe4 100%);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.oculto {
+  display: none !important;
+}
+
+.tela-login {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem clamp(1.5rem, 4vw, 4rem);
+}
+
+.panel-login,
+.login-arte {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(218, 205, 191, 0.9);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+}
+
+.panel-login {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  max-width: 620px;
+  width: 100%;
+  justify-self: end;
+}
+
+.brand-box {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--primary-soft), #fff0d9);
+  font-size: 2rem;
+}
+
+.brand-box h1 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--primary-dark);
+  letter-spacing: -0.04em;
+}
+
+.brand-box p {
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.login-badge {
+  display: inline-block;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 0.5rem 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.panel-login h2 {
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  margin-bottom: 0.5rem;
+}
+
+.subtitulo {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.campo-duplo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.campo label {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.campo input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(184, 106, 42, 0.12);
+}
+
+.btn-login {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  color: white;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.3rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 12px 28px rgba(184, 106, 42, 0.25);
+}
+
+.btn-login:hover {
+  transform: translateY(-1px);
+}
+
+.login-arte {
+  width: min(100%, 430px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  justify-self: start;
+}
+
+.arte-card {
+  background: linear-gradient(180deg, rgba(255, 250, 244, 0.9), rgba(255, 255, 255, 0.75));
+  border: 1px solid rgba(232, 214, 196, 0.9);
+  border-radius: 22px;
+  padding: 1.4rem;
+}
+
+.arte-card.destaque {
+  background: linear-gradient(135deg, rgba(184, 106, 42, 0.12), rgba(255, 255, 255, 0.9));
+}
+
+.arte-icone {
+  display: inline-flex;
+  font-size: 2rem;
+  margin-bottom: 0.7rem;
+}
+
+.arte-card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.arte-card p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.header {
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo .icon {
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary-soft), #fff);
+  font-size: 1.9rem;
+}
+
+.logo h1 {
+  font-size: 1.35rem;
+  color: var(--primary-dark);
+}
+
+.logo p {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.usuario-logado {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.btn-sair {
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  border: 1px solid rgba(184, 106, 42, 0.15);
+  border-radius: 999px;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.catalogo-section,
+.carrinho-section {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 1.4rem;
+}
+
+.titulo-catalogo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  color: var(--primary-dark);
+  background: var(--primary-soft);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.catalogo-section h2,
+.carrinho-section h2 {
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  color: var(--text);
+}
+
+.grid-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+.card-produto {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 250, 244, 0.96));
+  border: 1px solid rgba(232, 214, 196, 0.9);
+  border-radius: 22px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-produto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(75, 53, 30, 0.12);
+}
+
+.card-produto img {
+  width: 100%;
+  height: 185px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.tag {
+  display: inline-flex;
+  width: fit-content;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.card-produto h3 {
+  font-size: 1.08rem;
+  margin: 0.2rem 0 0.4rem;
+}
+
+.card-produto p {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  align-items: center;
+  border-top: 1px solid rgba(234, 220, 201, 0.8);
+  padding-top: 0.8rem;
+}
+
+.preco {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+.btn-adicionar {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(184, 106, 42, 0.26);
+}
+
+.carrinho-section {
+  position: sticky;
+  top: 1.3rem;
+  height: fit-content;
+}
+
+.lista-carrinho {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  min-height: 120px;
+}
+
+.carrinho-vazio {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.92rem;
+  padding: 2rem 1rem;
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  background: rgba(248, 244, 239, 0.9);
+}
+
+.item-carrinho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 0.9rem 0.8rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255, 248, 240, 0.9), rgba(255, 255, 255, 0.85));
+  border: 1px solid rgba(231, 216, 199, 0.9);
+}
+
+.item-carrinho .info {
+  flex: 1;
+}
+
+.item-carrinho .info h4 {
+  font-size: 0.92rem;
+  margin-bottom: 0.2rem;
+}
+
+.item-carrinho .info span {
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.qtd-controles {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+}
+
+.qtd-controles button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 9px;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.resumo-financeiro {
+  margin-top: 1.25rem;
+  border-top: 1px dashed var(--line);
+  padding-top: 1rem;
+}
+
+.linha-valor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+}
+
+.linha-valor.total {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-top: 0.7rem;
+}
+
+.acoes-carrinho {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.btn-retirar,
+.btn-finalizar {
+  border: none;
+  border-radius: 12px;
+  padding: 0.9rem 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-retirar {
+  background: #fff3ea;
+  color: var(--primary-dark);
+  border: 1px solid rgba(184, 106, 42, 0.15);
+}
+
+.btn-finalizar {
+  background: linear-gradient(135deg, var(--success), var(--success-dark));
+  color: white;
+}
+
+@media (max-width: 900px) {
+  .tela-login {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-login,
+  .login-arte {
+    justify-self: center;
+    width: min(100%, 600px);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+
+  .campo-duplo,
+  .acoes-carrinho {
+    grid-template-columns: 1fr;
+  }
+}
